@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalcBREAD | Premium Calculation Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen">
+        <div class="glass-card auth-card">
+            <h1>CalcBREAD</h1>
+            <p class="subtitle">Secure Calculation Manager</p>
+            
+            <div class="tab-switcher">
+                <button id="tab-login" class="active">Login</button>
+                <button id="tab-register">Register</button>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="login-username" required placeholder="Enter username">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required placeholder="•••••">
+                </div>
+                <div id="login-error" class="message error"></div>
+                <button type="submit" id="login-btn" class="primary-btn">Sign In</button>
+            </form>
+
+            <form id="register-form" class="hidden">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="reg-username" required placeholder="Choose a username">
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" required placeholder="your@email.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" required placeholder="Create a password">
+                </div>
+                <div id="register-error" class="message"></div>
+                <button type="submit" id="register-btn" class="primary-btn">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard" class="screen hidden">
+        <nav class="glass-nav">
+            <div class="nav-content">
+                <span class="logo">CalcBREAD</span>
+                <div class="user-info">
+                    <span id="user-display">User</span>
+                    <button id="profile-btn" class="outline-btn">Settings</button>
+                    <button id="logout-btn" class="outline-btn">Logout</button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="dashboard-content">
+            <div class="top-row">
+                <!-- Calculator Form -->
+                <div class="glass-card form-card">
+                    <h2 id="form-title">New Calculation</h2>
+                    <form id="calc-form">
+                        <input type="hidden" id="edit-id">
+                        <div class="row">
+                            <input type="number" id="operand1" placeholder="Op 1" required step="any">
+                            <select id="operation">
+                                <option value="add">+</option>
+                                <option value="subtract">-</option>
+                                <option value="multiply">×</option>
+                                <option value="divide">÷</option>
+                                <option value="exponent">^</option>
+                                <option value="modulus">%</option>
+                            </select>
+                            <input type="number" id="operand2" placeholder="Op 2" required step="any">
+                        </div>
+                        <div id="form-message" class="message"></div>
+                        <button type="submit" id="submit-btn" class="primary-btn">Calculate</button>
+                        <button type="button" id="cancel-btn" class="outline-btn hidden">Cancel</button>
+                    </form>
+                </div>
+
+                <!-- NEW FEATURE: Statistics Report Card -->
+                <div class="glass-card stats-card">
+                    <h2>Usage Insights</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Calcs</span>
+                            <span id="stat-total" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Avg Result</span>
+                            <span id="stat-avg" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Top Op</span>
+                            <span id="stat-top" class="stat-value">-</span>
+                        </div>
+                    </div>
+                    <div class="last-calc">
+                        Last Active: <span id="stat-last">Never</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="glass-card table-card">
+                <h2>Calculation History</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Op 1</th>
+                                <th>Op</th>
+                                <th>Op 2</th>
+                                <th>Result</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calc-tbody">
+                            <!-- Rows loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Profile Settings Screen (Hidden by default) -->
+        <div id="profile-section" class="screen hidden" style="justify-content: flex-start; padding-top: 5rem;">
+            <div class="glass-card" style="width: 100%; max-width: 400px;">
+                <h2>Profile Settings</h2>
+                <form id="profile-form">
+                    <div class="input-group">
+                        <label>Update Email</label>
+                        <input type="email" id="prof-email" required>
+                    </div>
+                    <div class="input-group">
+                        <label>New Password (leave blank to keep current)</label>
+                        <input type="password" id="prof-password" placeholder="•••••">
+                    </div>
+                    <div id="profile-message" class="message"></div>
+                    <div class="row">
+                        <button type="submit" class="primary-btn">Save Changes</button>
+                        <button type="button" id="close-profile" class="outline-btn" style="margin-top: 1rem; width: 100%;">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
